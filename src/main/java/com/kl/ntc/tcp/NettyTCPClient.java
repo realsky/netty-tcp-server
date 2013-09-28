@@ -1,4 +1,4 @@
-package com.kl.ntc;
+package com.kl.ntc.tcp;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
@@ -11,8 +11,11 @@ import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+import org.apache.log4j.Logger;
 
-public class NettyTCPClient {
+public class NettyTCPClient extends Thread {
+    private static final Logger LOG = Logger.getLogger(NettyTCPClient.class.getName());
+
     private final String host;
     private final int port;
 
@@ -21,7 +24,7 @@ public class NettyTCPClient {
         this.port = port;
     }
 
-    public void run() throws Exception {
+    public void run() {
         EventLoopGroup group = new NioEventLoopGroup();
         try {
             Bootstrap b = new Bootstrap();
@@ -47,6 +50,8 @@ public class NettyTCPClient {
 
             // Wait for the server to close the connection.
             ch.closeFuture().sync();
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
         } finally {
             group.shutdownGracefully();
         }

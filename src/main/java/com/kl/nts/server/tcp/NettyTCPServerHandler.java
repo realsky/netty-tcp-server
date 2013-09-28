@@ -1,4 +1,4 @@
-package com.kl.nts.server;
+package com.kl.nts.server.tcp;
 
 import com.kl.nts.json.AuthMessage;
 import com.kl.nts.task.ClientTask;

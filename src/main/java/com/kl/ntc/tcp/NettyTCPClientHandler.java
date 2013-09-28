@@ -1,4 +1,4 @@
-package com.kl.ntc;
+package com.kl.ntc.tcp;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
